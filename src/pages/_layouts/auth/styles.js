@@ -30,6 +30,7 @@ export const Content = styled.div`
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.7);
+        opacity: 0.3;
       }
     }
 
