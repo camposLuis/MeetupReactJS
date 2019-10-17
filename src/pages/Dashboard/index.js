@@ -22,7 +22,7 @@ export default function Dashboard() {
           <strong>Meetup de React Native</strong>
           <Time>
             <span>20 de Outubro, às 20h</span>
-            <Link to="/meetup">
+            <Link to="/detail">
               <MdChevronRight size={24} color="#FFF" />
             </Link>
           </Time>
@@ -31,7 +31,7 @@ export default function Dashboard() {
           <strong>Meetup de React Native</strong>
           <Time>
             <span>20 de Outubro, às 20h</span>
-            <Link to="/meetup">
+            <Link to="/detail">
               <MdChevronRight size={24} color="#FFF" />
             </Link>
           </Time>
@@ -40,7 +40,7 @@ export default function Dashboard() {
           <strong>Meetup de React Native</strong>
           <Time>
             <span>20 de Outubro, às 20h</span>
-            <Link to="/meetup">
+            <Link to="/detail">
               <MdChevronRight size={24} color="#FFF" />
             </Link>
           </Time>

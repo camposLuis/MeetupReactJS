@@ -17,6 +17,7 @@ export default createGlobalStyle`
     height: 100%;
   }
   body {
+    padding-bottom: 0px;
     -webkit-font-smoothing: antialiased;
   }
   body, input, button {
