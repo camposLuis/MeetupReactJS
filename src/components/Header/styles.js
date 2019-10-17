@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   background: #000;
@@ -6,8 +7,8 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  height: 64px;
-  max-width: 900px;
+  height: 92px;
+  max-width: 940px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -20,11 +21,6 @@ export const Content = styled.div`
     img {
       margin-right: 20px;
       padding-right: 20px;
-    }
-
-    a {
-      font-weight: bold;
-      color: #7159c1;
     }
   }
 
@@ -45,20 +41,32 @@ export const Profile = styled.div`
 
     strong {
       display: block;
-      color: #333;
+      color: #fff;
+      font-size: 14;
     }
 
     a {
       display: block;
-      margin-top: 2px;
-      font-size: 12px;
+      margin-top: 5px;
+      font-size: 14px;
       color: #999;
     }
   }
 
-  img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+  button {
+    margin-left: 20px;
+    height: 42px;
+    width: 71px;
+    background: #f94d6a;
+    font-weight: bold;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.05, '#f94d6a')};
+    }
   }
 `;
