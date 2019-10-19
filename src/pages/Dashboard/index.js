@@ -1,10 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
+import { parseISO, format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 import { Container, Register, Time } from './styles';
 
+import api from '~/services/api';
+
 export default function Dashboard() {
+  const [meetup, setMeetup] = useState([]);
+
+  useEffect(() => {
+    async function loadMeetup() {
+      const response = await api.get('meetups');
+
+      const data = response.data.map(event => {
+        return {
+          id: event.id,
+          title: event.title,
+          dateFormated: format(
+            parseISO(event.date),
+            "dd 'de' MMMM 'de' yyyy', às' H'h'",
+            { locale: pt }
+          ),
+        };
+      });
+
+      setMeetup(data);
+    }
+    loadMeetup();
+  }, []);
+
   return (
     <Container>
       <header>
@@ -18,33 +45,17 @@ export default function Dashboard() {
         </Link>
       </header>
       <ul>
-        <Register>
-          <strong>Meetup de React Native</strong>
-          <Time>
-            <span>20 de Outubro, às 20h</span>
-            <Link to="/detail">
-              <MdChevronRight size={24} color="#FFF" />
-            </Link>
-          </Time>
-        </Register>
-        <Register>
-          <strong>Meetup de React Native</strong>
-          <Time>
-            <span>20 de Outubro, às 20h</span>
-            <Link to="/detail">
-              <MdChevronRight size={24} color="#FFF" />
-            </Link>
-          </Time>
-        </Register>
-        <Register>
-          <strong>Meetup de React Native</strong>
-          <Time>
-            <span>20 de Outubro, às 20h</span>
-            <Link to="/detail">
-              <MdChevronRight size={24} color="#FFF" />
-            </Link>
-          </Time>
-        </Register>
+        {meetup.map(meetup => (
+          <Register key={meetup.id}>
+            <strong>{meetup.title}</strong>
+            <Time>
+              <span>{meetup.dateFormated}</span>
+              <Link to={`/detail/${meetup.id}`}>
+                <MdChevronRight size={24} color="#FFF" />
+              </Link>
+            </Time>
+          </Register>
+        ))}
       </ul>
     </Container>
   );
