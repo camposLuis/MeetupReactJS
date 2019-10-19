@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { parseISO, format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import {
   MdDeleteForever,
   MdCreate,
   MdInsertInvitation,
   MdLocationOn,
 } from 'react-icons/md';
+
+import api from '~/services/api';
 
 import {
   Container,
@@ -20,14 +25,37 @@ import {
   AddressEvent,
 } from './styles';
 
-import banner from '~/assets/meetup.svg';
-
 export default function Detail() {
+  const [meetup, setMeetup] = useState([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function loadMeetup() {
+      const response = await api.get(`meetups/${id}`);
+
+      const data = {
+        id: response.data.id,
+        title: response.data.title,
+        url: response.data.banner.url,
+        description: response.data.description,
+        location: response.data.location,
+        dateFormated: format(
+          parseISO(response.data.date),
+          "dd 'de' MMMM 'de' yyyy', às' H'h'",
+          { locale: pt }
+        ),
+      };
+
+      setMeetup(data);
+    }
+    loadMeetup();
+  }, [id]);
+
   return (
     <Container>
       <Header>
         <Title>
-          <strong>Meetup de React Native</strong>
+          <strong>{meetup.title}</strong>
         </Title>
         <Actions>
           <EditButton type="submit">
@@ -45,28 +73,19 @@ export default function Detail() {
         </Actions>
       </Header>
       <Banner>
-        <img src={banner} alt="React-Native" />
+        <img src={meetup.url} alt="React-Native" />
       </Banner>
       <Description>
-        <p>
-          O Meetup de React Native é um evento que reúne a comunidade de
-          desenvolvimento mobile utilizando React a fim de compartilhar
-          conhecimento. Todos são convidados.{' '}
-        </p>{' '}
-        <br />
-        <p>
-          Caso queira participar como palestrante do meetup envie um e-mail para
-          organizacao@meetuprn.com.br.
-        </p>
+        <p>{meetup.description}</p>
       </Description>
       <Location>
         <DateEvent>
           <MdInsertInvitation size={20} color="#FFF" opacity={0.6} />
-          <span>20 de Outubro, às 20h</span>
+          <span>{meetup.dateFormated}</span>
         </DateEvent>
         <AddressEvent>
           <MdLocationOn size={20} color="#FFF" opacity={0.6} />
-          <span>Rua Dos Benvindos, 101</span>
+          <span>{meetup.location}</span>
         </AddressEvent>
       </Location>
     </Container>
