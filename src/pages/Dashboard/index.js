@@ -4,7 +4,7 @@ import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
-import { Container, Register, Time } from './styles';
+import { Container, Register, Time, NotRegister } from './styles';
 
 import api from '~/services/api';
 
@@ -44,19 +44,25 @@ export default function Dashboard() {
           </div>
         </Link>
       </header>
-      <ul>
-        {meetup.map(meetup => (
-          <Register key={meetup.id}>
-            <strong>{meetup.title}</strong>
-            <Time>
-              <span>{meetup.dateFormated}</span>
-              <Link to={`/detail/${meetup.id}`}>
-                <MdChevronRight size={24} color="#FFF" />
-              </Link>
-            </Time>
-          </Register>
-        ))}
-      </ul>
+      {meetup.length !== 0 ? (
+        <ul>
+          {meetup.map(meetup => (
+            <Register key={meetup.id}>
+              <strong>{meetup.title}</strong>
+              <Time>
+                <span>{meetup.dateFormated}</span>
+                <Link to={`/detail/${meetup.id}`}>
+                  <MdChevronRight size={24} color="#FFF" />
+                </Link>
+              </Time>
+            </Register>
+          ))}
+        </ul>
+      ) : (
+        <NotRegister>
+          <strong>Nenhum registro</strong>
+        </NotRegister>
+      )}
     </Container>
   );
 }

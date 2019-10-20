@@ -1,18 +1,17 @@
-export function detailMeetupRequest(idMeetup) {
+export function createMeetupRequest(data) {
   return {
-    type: '@detail/DETAIL_MEETUP_REQUEST',
-    payload: { idMeetup },
+    type: '@meetup/CREATE_MEETUP_REQUEST',
+    payload: { data },
   };
 }
 
-export function detailMeetupSuccess(meetup) {
+export function createMeetupSuccess() {
   return {
-    type: '@detail/DETAIL_MEETUP_SUCCESS',
-    payload: { meetup },
+    type: '@meetup/CREATE_MEETUP_SUCCESS',
   };
 }
-export function detailMeetupFailure() {
+export function meetupFailure() {
   return {
-    type: '@detail/DETAIL_MEETUP_FAILURE',
+    type: '@meetup/MEETUP_FAILURE',
   };
 }

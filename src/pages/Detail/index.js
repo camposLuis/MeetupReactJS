@@ -10,6 +10,7 @@ import {
 } from 'react-icons/md';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 import {
   Container,
@@ -33,20 +34,24 @@ export default function Detail() {
     async function loadMeetup() {
       const response = await api.get(`meetups/${id}`);
 
-      const data = {
-        id: response.data.id,
-        title: response.data.title,
-        url: response.data.banner.url,
-        description: response.data.description,
-        location: response.data.location,
-        dateFormated: format(
-          parseISO(response.data.date),
-          "dd 'de' MMMM 'de' yyyy', às' H'h'",
-          { locale: pt }
-        ),
-      };
+      try {
+        const data = {
+          id: response.data.id,
+          title: response.data.title,
+          url: response.data.banner.url,
+          description: response.data.description,
+          location: response.data.location,
+          dateFormated: format(
+            parseISO(response.data.date),
+            "dd 'de' MMMM 'de' yyyy', às' H'h'",
+            { locale: pt }
+          ),
+        };
 
-      setMeetup(data);
+        setMeetup(data);
+      } catch (err) {
+        history.push('/dashboard');
+      }
     }
     loadMeetup();
   }, [id]);

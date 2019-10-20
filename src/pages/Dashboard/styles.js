@@ -99,3 +99,22 @@ export const Time = styled.div`
     }
   }
 `;
+
+export const NotRegister = styled.li`
+  background: rgba(0, 0, 0, 0.2);
+  width: 940px;
+  height: 62px;
+  margin-top: 50px;
+  border: 0;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  strong {
+    margin-left: 30px;
+    color: #fff;
+    font-size: 18px;
+    opacity: 0.4;
+  }
+`;
