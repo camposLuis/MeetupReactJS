@@ -3,10 +3,11 @@ import ReactDatePicker from 'react-datepicker';
 import { useField } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
 
+import { parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { Container } from './styles';
 
-export default function DatePickerInput({ name }) {
+export default function DatePickerInput({ name, dateSelected }) {
   const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [selected, setSelected] = useState(defaultValue);
@@ -20,7 +21,11 @@ export default function DatePickerInput({ name }) {
         pickerRef.clear();
       },
     });
-  }, [ref.current, fieldName]); // eslint-disable-line
+
+    if (dateSelected) {
+      setSelected(parseISO(dateSelected));
+    }
+  }, [ref.current, fieldName, dateSelected]); // eslint-disable-line
 
   return (
     <Container>
@@ -34,7 +39,7 @@ export default function DatePickerInput({ name }) {
         timeIntervals={60}
         locale={pt}
         timeCaption="time"
-        dateFormat="dd 'de' MMMM 'de' yyyy 'às' H'h'"
+        dateFormat="dd 'de' MMMM 'de' yyyy', às' H'h'"
         ref={ref}
       />
       {error && <span>{error}</span>}

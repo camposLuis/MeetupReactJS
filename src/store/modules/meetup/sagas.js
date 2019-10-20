@@ -25,15 +25,29 @@ export function* createMeetup({ payload }) {
       banner_id,
     };
 
-    const response = yield call(api.post, 'meetups', meetup);
+    if (payload.data.id === undefined) {
+      const response = yield call(api.post, 'meetups', meetup);
 
-    history.push('/dashboard');
+      history.push('/dashboard');
 
-    toast.success('Cadastro realizado com sucesso!');
+      toast.success('Meetup cadastrada com sucesso!');
 
-    yield put(createMeetupSuccess(response.data));
+      yield put(createMeetupSuccess(response.data));
+    } else {
+      const response = yield call(
+        api.put,
+        `meetups/${payload.data.id}`,
+        meetup
+      );
+
+      history.push('/dashboard');
+
+      toast.success('Meetup editada com sucesso!');
+
+      yield put(createMeetupSuccess(response.data));
+    }
   } catch (err) {
-    toast.error('Erro ao cadastrar, confira os dados informados!');
+    toast.error('Erro ao salvar, confira os dados informados!');
     yield put(meetupFailure());
   }
 }

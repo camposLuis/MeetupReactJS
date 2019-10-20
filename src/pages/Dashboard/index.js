@@ -37,7 +37,7 @@ export default function Dashboard() {
       <header>
         <strong>Meus meetups</strong>
 
-        <Link to="/meetup">
+        <Link to="/newMeetup">
           <div>
             <MdAddCircleOutline size={20} color="#FFF" />
             <strong>Novo meetup</strong>
@@ -51,7 +51,7 @@ export default function Dashboard() {
               <strong>{meetup.title}</strong>
               <Time>
                 <span>{meetup.dateFormated}</span>
-                <Link to={`/meetups/${meetup.id}/detail`}>
+                <Link to={`/detailMeetup/${meetup.id}`}>
                   <MdChevronRight size={24} color="#FFF" />
                 </Link>
               </Time>

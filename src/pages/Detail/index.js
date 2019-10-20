@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { toast } from 'react-toastify';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
@@ -47,6 +48,7 @@ export default function Detail() {
           url: response.data.banner.url,
           description: response.data.description,
           location: response.data.location,
+          past: response.data.past,
           dateFormated: format(
             parseISO(response.data.date),
             "dd 'de' MMMM 'de' yyyy', às' H'h'",
@@ -62,8 +64,16 @@ export default function Detail() {
     loadMeetup();
   }, [id]);
 
-  function canceledMeetup(id) {
-    dispatch(cancelMeetupRequest(id));
+  function editMeetup(meetupEditable) {
+    if (!meetupEditable.past) {
+      history.push(`/editMeetup/${meetupEditable.id}`);
+    } else {
+      toast.error('Meetup já realizada, não é possível editar');
+    }
+  }
+
+  function canceledMeetup(idCanceled) {
+    dispatch(cancelMeetupRequest(idCanceled));
   }
 
   return (
@@ -73,7 +83,7 @@ export default function Detail() {
           <strong>{meetup.title}</strong>
         </Title>
         <Actions>
-          <EditButton type="submit">
+          <EditButton type="button" onClick={() => editMeetup(meetup)}>
             <div>
               <MdCreate size={20} color="#FFF" />
               <strong>Editar</strong>

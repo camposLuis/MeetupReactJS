@@ -5,7 +5,7 @@ import api from '~/services/api';
 
 import { Container } from './styles';
 
-export default function BannerInput() {
+export default function BannerInput({ idBanner, urlBanner }) {
   const { defaultValue, registerField } = useField('banner');
 
   const [file, setFile] = useState(defaultValue && defaultValue.id);
@@ -21,7 +21,11 @@ export default function BannerInput() {
         path: 'dataset.file',
       });
     }
-  }, [ref.current]); // eslint-disable-line
+    if (idBanner && urlBanner) {
+      setFile(idBanner);
+      setPreview(urlBanner);
+    }
+  }, [ref.current, idBanner, urlBanner]); // eslint-disable-line
 
   async function handleChange(e) {
     const data = new FormData();
