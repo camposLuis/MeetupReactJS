@@ -18,8 +18,8 @@ export default function Routes() {
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
       <Route path="/meetup" component={Meetup} isPrivate />
-      <Route path="/meetup/edit/:id" component={Meetup} isPrivate />
-      <Route path="/detail/:id" component={Detail} isPrivate />
+      <Route path="/meetup/:id/edit" component={Meetup} isPrivate />
+      <Route path="/meetups/:id/detail" component={Detail} isPrivate />
       <Route path="*" exact component={NotFound} />
     </Switch>
   );

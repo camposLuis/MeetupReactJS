@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+
 import {
   MdDeleteForever,
   MdCreate,
   MdInsertInvitation,
   MdLocationOn,
 } from 'react-icons/md';
+
+import { cancelMeetupRequest } from '~/store/modules/meetup/actions';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -27,12 +31,14 @@ import {
 } from './styles';
 
 export default function Detail() {
+  const loading = useSelector(state => state.meetup.loading);
+  const dispatch = useDispatch();
   const [meetup, setMeetup] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
     async function loadMeetup() {
-      const response = await api.get(`meetups/${id}`);
+      const response = await api.get(`meetups/${id}/detail`);
 
       try {
         const data = {
@@ -56,6 +62,10 @@ export default function Detail() {
     loadMeetup();
   }, [id]);
 
+  function canceledMeetup(id) {
+    dispatch(cancelMeetupRequest(id));
+  }
+
   return (
     <Container>
       <Header>
@@ -69,9 +79,13 @@ export default function Detail() {
               <strong>Editar</strong>
             </div>
           </EditButton>
-          <CancelButton type="submit">
+          <CancelButton type="button" onClick={() => canceledMeetup(meetup.id)}>
             <div>
-              <MdDeleteForever size={20} color="#FFF" />
+              {loading ? (
+                <i className="fa fa-spinner fa-pulse" />
+              ) : (
+                <MdDeleteForever size={20} color="#FFF" />
+              )}
               <strong>Cancelar</strong>
             </div>
           </CancelButton>

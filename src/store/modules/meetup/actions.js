@@ -11,6 +11,19 @@ export function createMeetupSuccess() {
   };
 }
 
+export function cancelMeetupRequest(id) {
+  return {
+    type: '@meetup/CANCEL_MEETUP_REQUEST',
+    payload: { id },
+  };
+}
+
+export function cancelMeetupSuccess() {
+  return {
+    type: '@meetup/CANCEL_MEETUP_SUCCESS',
+  };
+}
+
 export function meetupFailure() {
   return {
     type: '@meetup/MEETUP_FAILURE',
