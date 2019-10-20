@@ -10,6 +10,7 @@ export function createMeetupSuccess() {
     type: '@meetup/CREATE_MEETUP_SUCCESS',
   };
 }
+
 export function meetupFailure() {
   return {
     type: '@meetup/MEETUP_FAILURE',

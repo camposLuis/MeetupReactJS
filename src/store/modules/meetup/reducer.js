@@ -15,6 +15,10 @@ export default function meetup(state = INITIAL_STATE, action) {
         draft.loading = false;
         break;
       }
+      case '@meetup/MEETUP_FAILURE': {
+        draft.loading = false;
+        break;
+      }
       default:
     }
   });

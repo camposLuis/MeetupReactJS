@@ -11,6 +11,7 @@ import BannerInput from './BannerInput';
 import DatePickerInput from '~/components/DatePickerInput';
 
 export default function Meetup() {
+  const loading = useSelector(state => state.meetup.loading);
   const dispatch = useDispatch();
 
   function handleSubmit(data) {
@@ -28,7 +29,12 @@ export default function Meetup() {
 
         <Button type="submit">
           <div>
-            <MdAddCircleOutline size={20} color="#FFF" />
+            {loading ? (
+              <i className="fa fa-spinner fa-pulse" />
+            ) : (
+              <MdAddCircleOutline size={20} color="#FFF" />
+            )}
+
             <strong>Salvar meetup</strong>
           </div>
         </Button>
