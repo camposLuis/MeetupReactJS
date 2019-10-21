@@ -1,5 +1,6 @@
 import { takeLatest, call, put, all, select } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import { isBefore } from 'date-fns';
 
 import history from '~/services/history';
 import api from '~/services/api';
@@ -25,7 +26,10 @@ export function* createMeetup({ payload }) {
       banner_id,
     };
 
-    if (payload.data.id === undefined) {
+    if (isBefore(meetup.date, new Date())) {
+      toast.error('A data informada não é permitida, tente outra');
+      yield put(meetupFailure());
+    } else if (payload.data.id === undefined) {
       const response = yield call(api.post, 'meetups', meetup);
 
       history.push('/dashboard');

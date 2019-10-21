@@ -48,5 +48,6 @@ export default function DatePickerInput({ name, dateSelected }) {
 }
 
 DatePickerInput.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.element.isRequired,
+  dateSelected: PropTypes.element.isRequired,
 };

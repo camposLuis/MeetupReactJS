@@ -9,7 +9,7 @@ import { Container, Register, Time, NotRegister } from './styles';
 import api from '~/services/api';
 
 export default function Dashboard() {
-  const [meetup, setMeetup] = useState([]);
+  const [meetups, setMeetups] = useState([]);
 
   useEffect(() => {
     async function loadMeetup() {
@@ -27,7 +27,7 @@ export default function Dashboard() {
         };
       });
 
-      setMeetup(data);
+      setMeetups(data);
     }
     loadMeetup();
   }, []);
@@ -44,9 +44,9 @@ export default function Dashboard() {
           </div>
         </Link>
       </header>
-      {meetup.length !== 0 ? (
+      {meetups.length !== 0 ? (
         <ul>
-          {meetup.map(meetup => (
+          {meetups.map(meetup => (
             <Register key={meetup.id}>
               <strong>{meetup.title}</strong>
               <Time>

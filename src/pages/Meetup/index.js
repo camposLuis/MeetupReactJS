@@ -64,10 +64,8 @@ export default function Meetup() {
   }, [id, pathname]);
 
   function handleSubmit(data) {
-    // console.log(data.id);
     dispatch(createMeetupRequest(data));
   }
-  // console.log(meetup);
 
   return (
     <Container>

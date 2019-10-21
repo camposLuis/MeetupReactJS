@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useField } from '@rocketseat/unform';
 import { MdLocalSee } from 'react-icons/md';
+import PropTypes from 'prop-types';
+
 import api from '~/services/api';
 
 import { Container } from './styles';
@@ -62,3 +64,8 @@ export default function BannerInput({ idBanner, urlBanner }) {
     </Container>
   );
 }
+
+BannerInput.propTypes = {
+  idBanner: PropTypes.shape().isRequired,
+  urlBanner: PropTypes.shape().isRequired,
+};

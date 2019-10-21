@@ -9,8 +9,6 @@ export function* updateProfile({ payload }) {
   try {
     const { name, email, ...rest } = payload.data;
 
-    console.log(payload.data);
-
     const profile = {
       name,
       email,
