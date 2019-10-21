@@ -39,9 +39,9 @@ export default function Detail() {
 
   useEffect(() => {
     async function loadMeetup() {
-      const response = await api.get(`meetups/${id}/detail`);
-
       try {
+        const response = await api.get(`meetups/${id}/detail`);
+
         const data = {
           id: response.data.id,
           title: response.data.title,

@@ -66,6 +66,6 @@ export default function BannerInput({ idBanner, urlBanner }) {
 }
 
 BannerInput.propTypes = {
-  idBanner: PropTypes.shape().isRequired,
-  urlBanner: PropTypes.shape().isRequired,
+  idBanner: PropTypes.element.isRequired,
+  urlBanner: PropTypes.element.isRequired,
 };
