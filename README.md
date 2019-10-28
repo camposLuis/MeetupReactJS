@@ -6,7 +6,7 @@
 
 <b>1.</b> Para executar e testar este projeto será necessário configura o projeto do seguinte repositório:
 
-- https://github.com/camposLuis/MeetupNodeJS (API REST)
+- https://github.com/camposLuis/MeetupNodeJS (aplicação API REST)
 
 <b>2.</b> Baixe o projeto ou clone o repositório
 
